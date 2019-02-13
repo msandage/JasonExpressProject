@@ -40,12 +40,8 @@ editedNote.message = req.params['notemessage']
 /* This writenote part doesn't seem to be necessary? */
 Store.writeNote(editedNote)
 
-res.send(editedNote)
+res.send(Store.getNote(req.params['noteid'])
 })
-
-
-
-
 
 
 

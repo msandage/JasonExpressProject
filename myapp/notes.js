@@ -25,6 +25,7 @@ class NoteDataStore
 
     writeNote(note)
     {
+        note = this._copyNote(note)
         note.updatedAt = new Date().valueOf()
         this.XUZCYX[note.id] = note
     }
@@ -39,17 +40,29 @@ class NoteDataStore
 
     getNotes()
     {
-        return Object.values(this.XUZCYX)
+        return Object.values(this.XUZCYX).map(this._copyNote)
     }
 
     getNote(id)
     {
-        return this.XUZCYX[id] || null
+        return this._copyNote(this.XUZCYX[id] || null)
     }
 
     toString()
     {
         return this.message
+    }
+
+    _copyNote(note) {
+        if(!note)
+            return note
+        const copy = new Note()
+        copy.id = note.id
+        copy.created = note.created
+        copy.updatedAt = note.updatedAt
+        copy.title = note.title
+        copy.message = note.message
+        return copy
     }
 }
 
