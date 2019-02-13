@@ -37,10 +37,10 @@ let editedNote = Store.getNote(req.params['noteid'])
 editedNote.title = req.params['notetitle']
 editedNote.message = req.params['notemessage']
 
-/* This writenote part doesn't seem to be necessary? */
 Store.writeNote(editedNote)
 
-res.send(Store.getNote(req.params['noteid'])
+// Is it better to re-fetch from the database or to return the local editedNote copy with res.send(editedNote)?
+res.send(Store.getNote(req.params['noteid']))
 })
 
 
